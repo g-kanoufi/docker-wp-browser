@@ -63,6 +63,7 @@ ENV WP_TABLE_PREFIX="vnzokz0zw_"
 ENV ADMIN_EMAIL="tester@test.zrz"
 ENV ADMIN_USERNAME="admin"
 ENV ADMIN_PASSWORD="password"
+ENV WP_ADMIN_PATH="/wp-admin"
 
 # Set up wp-browser / codeception
 WORKDIR /var/www/config
