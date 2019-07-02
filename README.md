@@ -43,7 +43,7 @@ services:
     command: codecept run
     environment:
       DB_NAME:     wordpress
-      DB_HOST:     'db:3306'
+      DB_HOST:     'db'
       DB_USER:     wordpress
       DB_PASSWORD: wordpress
 ```
