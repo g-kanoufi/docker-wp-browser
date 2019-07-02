@@ -43,9 +43,14 @@ fi
 
 mkdir -p /var/www/html/wp-content
 
-wp db export \
-	/var/www/html/wp-content/mysql.sql \
-	--allow-root
+# Import dump from db
+wp db import \
+	/var/www/html/tests/tests_dump.sql
+	
+# Add our testing user as it got erased form the db import
+wp user create $ADMIN_USERNAME $ADMIN_EMAIL \
+		--role='administrator' \
+		--user_pass=$ADMIN_PASSWORD
 
 # Run the passed command
 exec "$@"
