@@ -50,18 +50,17 @@ RUN composer global require --optimize-autoloader \
 RUN composer global require \
     phpunit/phpunit:8.1 \
     lucatume/wp-browser:^2.2 \
-    league/factory-muffin:^3.0 \
-    league/factory-muffin-faker:^2.0
+    fzaninotto/faker:^1.8
 
 # Add composer global binaries to PATH
 ENV PATH "$PATH:~/.composer/vendor/bin"
 
 # Set up WordPress config
 ENV WP_ROOT_FOLDER="/var/www/html"
-ENV WP_URL="http://localhost"
-ENV WP_DOMAIN="localhost"
-ENV WP_TABLE_PREFIX="wp_"
-ENV ADMIN_EMAIL="admin@wordpress.local"
+ENV WP_URL="http://test.zrz"
+ENV WP_DOMAIN="test.zrz"
+ENV WP_TABLE_PREFIX="vnzokz0zw_"
+ENV ADMIN_EMAIL="tester@test.zrz"
 ENV ADMIN_USERNAME="admin"
 ENV ADMIN_PASSWORD="password"
 
