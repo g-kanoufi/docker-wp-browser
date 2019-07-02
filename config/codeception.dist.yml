@@ -35,7 +35,7 @@ modules:
             wpRootFolder:        '%WP_ROOT_FOLDER%'
             adminUsername:       '%ADMIN_USERNAME%'
             adminPassword:       '%ADMIN_PASSWORD%'
-            adminPath:           '/wp-admin'
+            adminPath:           '%WP_ADMIN_PATH%'
         WPLoader:
             wpRootFolder: "%WP_ROOT_FOLDER%"
             dbName: "%DB_NAME%"
