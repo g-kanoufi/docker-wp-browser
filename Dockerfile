@@ -1,7 +1,5 @@
-FROM php:7.2-apache-stretch
-
+FROM php:7.3-apache-stretch
 SHELL [ "/bin/bash", "-c" ]
-
 # Install required system packages
 RUN apt-get update && \
     apt-get -y install \
@@ -15,7 +13,6 @@ RUN apt-get update && \
     tar \
     gzip \
     wget
-
 # Install php extensions
 RUN docker-php-ext-install \
     bcmath \
@@ -24,28 +21,22 @@ RUN docker-php-ext-install \
     pdo_mysql \
     mysqli \
     opcache
-
 # Configure php
 RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
-
 # Install Dockerize
 ENV DOCKERIZE_VERSION v0.6.1
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-
 # Install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
-
 RUN curl -sS https://getcomposer.org/installer | php -- \
     --filename=composer \
     --install-dir=/usr/local/bin
-
 # Install tool to speed up composer installations
 RUN composer global require --optimize-autoloader \
     "hirak/prestissimo"
-
 # Install wp-browser globally
 RUN composer global require \
     phpunit/phpunit:8.1 \
@@ -54,7 +45,6 @@ RUN composer global require \
 
 # Add composer global binaries to PATH
 ENV PATH "$PATH:~/.composer/vendor/bin"
-
 # Set up WordPress config
 ENV WP_ROOT_FOLDER="/var/www/html"
 ENV WP_URL="http://test.zrz"
@@ -68,10 +58,8 @@ ENV WP_ADMIN_PATH="/wp-admin"
 # Set up wp-browser / codeception
 WORKDIR /var/www/config
 COPY    config/codeception.dist.yml codeception.dist.yml
-
 # Set up Apache
 RUN  echo 'ServerName localhost' >> /etc/apache2/apache2.conf
-
 # Set up entrypoint
 WORKDIR    /var/www/html
 COPY       entrypoint.sh /entrypoint.sh
