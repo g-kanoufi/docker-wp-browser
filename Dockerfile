@@ -5,24 +5,23 @@ RUN apt-get update && \
     apt-get -y install \
     # WordPress dependencies
     libjpeg-dev \
+    libmagickwand-dev \
     libpng-dev \
-    mysql-client \
-    # CircleCI depedencies
-    git \
-    ssh \
-    tar \
-    gzip \
-    wget
-# Install php extensions
-RUN docker-php-ext-install \
+    libzip-dev \
+    # Install php extensions
+    RUN docker-php-ext-install \
     bcmath \
     zip \
     gd \
     pdo_mysql \
     mysqli \
-    opcache
-# Configure php
-RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
+    opcache \
+    zip \
+    ; \
+    pecl install imagick-3.4.4; \
+    docker-php-ext-enable imagick; \
+    # Configure php
+    RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
 # Install Dockerize
 ENV DOCKERIZE_VERSION v0.6.1
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
