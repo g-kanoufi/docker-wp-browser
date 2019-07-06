@@ -47,8 +47,8 @@ RUN composer global require \
 ENV PATH "$PATH:~/.composer/vendor/bin"
 # Set up WordPress config
 ENV WP_ROOT_FOLDER="/var/www/html"
-ENV WP_URL="http://localhost"
-ENV WP_DOMAIN="localhost"
+ENV WP_URL="http://test.zrz"
+ENV WP_DOMAIN="test.zrz"
 ENV WP_TABLE_PREFIX="vnzokz0zw_"
 ENV ADMIN_EMAIL="tester@test.zrz"
 ENV ADMIN_USERNAME="admin"
@@ -59,7 +59,7 @@ ENV WP_ADMIN_PATH="/wp-admin"
 WORKDIR /var/www/config
 COPY    config/codeception.dist.yml codeception.dist.yml
 # Set up Apache
-RUN  echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+RUN  echo 'ServerName test.zrz' >> /etc/apache2/apache2.conf
 # Set up entrypoint
 WORKDIR    /var/www/html
 COPY       entrypoint.sh /entrypoint.sh
