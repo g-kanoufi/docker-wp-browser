@@ -8,15 +8,19 @@ RUN apt-get update && \
     libmagickwand-dev \
     libpng-dev \
     libzip-dev \
-    mysql-client
+    mysql-client \
+    wget
 # Install php extensions
 RUN docker-php-ext-install \
     bcmath \
+    exif \
     zip \
     gd \
     pdo_mysql \
     mysqli \
     opcache
+RUN pecl install imagick-3.4.4
+RUN docker-php-ext-enable imagick
 # Configure php
 RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
 # Install Dockerize
