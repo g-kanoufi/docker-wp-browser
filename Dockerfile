@@ -15,13 +15,9 @@ RUN apt-get update && \
     gd \
     pdo_mysql \
     mysqli \
-    opcache \
-    zip \
-    ; \
-    pecl install imagick-3.4.4; \
-    docker-php-ext-enable imagick; \
-    # Configure php
-    RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
+    opcache
+# Configure php
+RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
 # Install Dockerize
 ENV DOCKERIZE_VERSION v0.6.1
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
