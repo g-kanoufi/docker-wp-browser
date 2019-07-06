@@ -8,8 +8,9 @@ RUN apt-get update && \
     libmagickwand-dev \
     libpng-dev \
     libzip-dev \
-    # Install php extensions
-    RUN docker-php-ext-install \
+    mysql-client
+# Install php extensions
+RUN docker-php-ext-install \
     bcmath \
     zip \
     gd \
