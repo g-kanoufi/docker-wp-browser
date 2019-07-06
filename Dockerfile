@@ -59,7 +59,7 @@ ENV WP_ADMIN_PATH="/wp-admin"
 WORKDIR /var/www/config
 COPY    config/codeception.dist.yml codeception.dist.yml
 # Set up Apache
-RUN  echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+RUN  echo 'ServerName test.zrz' >> /etc/apache2/apache2.conf
 # Set up entrypoint
 WORKDIR    /var/www/html
 COPY       entrypoint.sh /entrypoint.sh

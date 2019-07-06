@@ -22,18 +22,17 @@ docker-compose --file docker-compose.yml run --rm wpbrowser
 version: '3.7'
 
 services:
-
   db:
     image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE:      wordpress
-      MYSQL_USER:          wordpress
-      MYSQL_PASSWORD:      wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
 
   wpbrowser:
-    image: ryanshoover/wp-browser:latest
+    image: gkanoufi/zorzees-wp-browser:latest
     links:
       - db:mysql
     volumes:
@@ -42,9 +41,9 @@ services:
       - codeception.yml:/var/www/html/codeception.yml
     command: codecept run
     environment:
-      DB_NAME:     wordpress
-      DB_HOST:     'db'
-      DB_USER:     wordpress
+      DB_NAME: wordpress
+      DB_HOST: 'db'
+      DB_USER: wordpress
       DB_PASSWORD: wordpress
 ```
 
