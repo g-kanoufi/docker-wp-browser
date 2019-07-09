@@ -19,32 +19,47 @@ docker-compose --file docker-compose.yml run --rm wpbrowser
 ## Sample docker-compose
 
 ```yaml
-version: '3.7'
+version: '3'
 
 services:
   db:
-    image: mysql:5.7
-    restart: always
+    image: 'mysql:5.7'
+    command: --max_allowed_packet=32505856
+    networks:
+      db:
+        aliases:
+          - sql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_PASSWORD=wordpress
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=wordpress
+    ports:
+      - 33060:3306
+    restart: always
+    volumes:
+      - 'db_data:/var/lib/mysql'
 
   wpbrowser:
-    image: gkanoufi/zorzees-wp-browser:latest
-    links:
-      - db:mysql
-    volumes:
-      - wp-content:/var/www/html/wp-content
-      - tests:/var/www/html/tests
-      - codeception.yml:/var/www/html/codeception.yml
-    command: codecept run
+    image: 'ryanshoover/wp-browser:latest'
+    command: 'codecept run acceptance -vvv --debug'
+    networks:
+      db:
+    depends_on:
+      - db
     environment:
-      DB_NAME: wordpress
-      DB_HOST: 'db'
-      DB_USER: wordpress
-      DB_PASSWORD: wordpress
+      - DB_HOST=sql
+      - DB_NAME=wordpress
+      - DB_PASSWORD=wordpress
+      - DB_USER=wordpress
+    volumes:
+      - './wp-content:/var/www/html/wp-content'
+      - './tests:/var/www/html/tests'
+      - './codeception.yml:/var/www/html/codeception.yml'
+
+volumes:
+  db_data:
+networks: db:
 ```
 
 ## Opinionated Configuration

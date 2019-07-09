@@ -9,6 +9,10 @@ RUN apt-get update && \
     libpng-dev \
     libzip-dev \
     mysql-client \
+    git \
+    ssh \
+    tar \
+    gzip \
     wget
 # Install php extensions
 RUN docker-php-ext-install \
