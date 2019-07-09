@@ -52,6 +52,7 @@ services:
       - DB_NAME=wordpress
       - DB_PASSWORD=wordpress
       - DB_USER=wordpress
+      - SQL_DUMP_URL=tests/_data/mdb_dump.sql
     volumes:
       - './wp-content:/var/www/html/wp-content'
       - './tests:/var/www/html/tests'

@@ -44,7 +44,7 @@ fi
 
 # import our db dump
 wp db import \
-	/var/www/html/tests/mdb_dump.sql \
+	/var/www/html/$SQL_DUMP_URL \
 	--allow-root
 
 # Add our testing user as it got erased form the db import

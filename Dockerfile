@@ -58,6 +58,7 @@ ENV ADMIN_EMAIL="tester@test.zrz"
 ENV ADMIN_USERNAME="admin"
 ENV ADMIN_PASSWORD="password"
 ENV WP_ADMIN_PATH="/wp-admin"
+ENV SQL_DUMP_URL="tests/_data/mdb_dump.sql"
 
 # Set up wp-browser / codeception
 WORKDIR /var/www/config
