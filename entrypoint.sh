@@ -5,6 +5,8 @@ dockerize -wait tcp://$DB_HOST:3306 -timeout 1m
 
 # Ensure Apache is running
 service apache2 start
+a2enmod rewrite
+service apache2 restart
 
 # Link codeception config if not yet linked
 if [ ! -e codeception.dist.yml ]; then
