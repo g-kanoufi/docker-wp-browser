@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Ensure mysql is loaded
@@ -41,9 +42,11 @@ if ! $( wp core is-installed --allow-root ); then
 		--allow-root
 fi
 
+# mkdir -p /var/www/html/wp-content
 
-mkdir -p /var/www/html/wp-content
-
+wp db export \
+	/var/www/html/wp-content/mysql.sql \
+	--allow-root
 
 # Run the passed command
 exec "$@"
