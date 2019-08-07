@@ -42,16 +42,8 @@ if ! $( wp core is-installed --allow-root ); then
 fi
 
 
-# import our db dump
-wp db import \
-	/var/www/html/$SQL_DUMP_URL \
-	--allow-root
+mkdir -p /var/www/html/wp-content
 
-# Add our testing user as it got erased form the db import
-wp user create $ADMIN_USERNAME $ADMIN_EMAIL \
-		--role='administrator' \
-		--user_pass=$ADMIN_PASSWORD \
-		--allow-root
 
 # Run the passed command
 exec "$@"

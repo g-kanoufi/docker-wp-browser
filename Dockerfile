@@ -25,6 +25,10 @@ RUN docker-php-ext-install \
     opcache
 RUN pecl install imagick-3.4.4
 RUN docker-php-ext-enable imagick
+
+#mod rewrite
+RUN a2enmod rewrite
+
 # Configure php
 RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
 # Install Dockerize
@@ -45,7 +49,8 @@ RUN composer global require --optimize-autoloader \
 RUN composer global require \
     phpunit/phpunit:8.1 \
     lucatume/wp-browser:^2.2 \
-    fzaninotto/faker:^1.8
+    league/factory-muffin:^3.0 \
+    league/factory-muffin-faker:^2.0
 
 # Add composer global binaries to PATH
 ENV PATH "$PATH:~/.composer/vendor/bin"
