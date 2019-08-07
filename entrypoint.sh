@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Ensure mysql is loaded
